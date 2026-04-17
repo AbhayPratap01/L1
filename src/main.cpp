@@ -58,6 +58,8 @@ int main(int argc, char **argv) {
     return 1;
   }
   std::cout << "Client connected\n";
+
+  send(client_fd, "+PONG\r\n", 7, 0);
   
   close(client_fd);
   close(server_fd);
