@@ -52,9 +52,14 @@ int main(int argc, char **argv) {
 
   // Uncomment the code below to pass the first stage
   // 
-  accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
+  int client_fd = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
+  if(client_fd < 0) {
+    std::cerr << "Failed to accept client connection\n";
+    return 1;
+  }
   std::cout << "Client connected\n";
   
+  close(client_fd);
   close(server_fd);
 
   return 0;
